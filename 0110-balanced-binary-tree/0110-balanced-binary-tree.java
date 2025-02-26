@@ -21,14 +21,14 @@ class Solution {
     public static int helper(TreeNode root){
         if(root==null)return 0;
 
-        int left=helper(root.left);
-        if(left==-1)return -1;
+        int lh=helper(root.left);
+        if(lh==-1)return -1;
 
-        int right=helper(root.right);
-        if(right==-1)return -1;
+        int rh=helper(root.right);
+        if(rh==-1)return -1;
 
-        if(Math.abs(left-right)>1)return -1;
+        if(Math.abs(lh-rh)>1)return -1;
 
-        return 1+Math.max(left,right);
+        return 1+Math.max(lh,rh);
     }
 }
