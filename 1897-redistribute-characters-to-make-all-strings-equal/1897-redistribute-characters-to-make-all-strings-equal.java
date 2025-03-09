@@ -1,21 +1,21 @@
 class Solution {
     public boolean makeEqual(String[] words) {
-        Map<Character,Integer>counts=new HashMap<>();
+        int count[]=new int[26];
         for(String word:words){
             for(char ch:word.toCharArray()){
-                counts.put(ch,counts.getOrDefault(ch,0)+1);
+                count[ch-'a']++;
             }
         }
 
         int n=words.length;
-        for(Map.Entry<Character,Integer>entry:counts.entrySet()){
-            if(entry.getValue()%n!=0){
-                return false;
+        for(int i=0;i<26;i++){
+            if(count[i]>0){
+                if(count[i]%n!=0){
+                    return false;
+                }
             }
         }
 
         return true;
-     
-        
-        }
+    }
 }
