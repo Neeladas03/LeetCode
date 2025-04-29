@@ -1,56 +1,40 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
 class Solution {
+
     public ListNode sortList(ListNode head) {
-        if(head==null || head.next==null)return head;
-
-        ListNode mid=getmid(head);
-        ListNode righthead=mid.next;
-        mid.next=null;
-
-        ListNode left=sortList(head);
-        ListNode right=sortList(righthead);
-        return merge(left,right);
-    }
-
-    static ListNode getmid(ListNode head){
-        ListNode fast=head,slow=head;
-        while(fast.next!=null && fast.next.next!=null){
-            slow=slow.next;
-            fast=fast.next.next;
+        if (head == null || head.next == null) return head;
+        
+        ListNode slow = head, fast = head.next;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        return slow;
+        
+        
+        ListNode mid = slow.next;
+        slow.next = null;
+        
+        ListNode left = sortList(head);
+        ListNode right = sortList(mid);
+        
+        return merge(left, right);
     }
-
-    static ListNode merge(ListNode left,ListNode right){
-        ListNode dummy=new ListNode(0);
-        ListNode current=dummy;
-
-        while(left!=null && right!=null){
-            if(left.val<right.val){
-                current.next=left;
-                left=left.next;
+    
+    private ListNode merge(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(0);
+        ListNode tail = dummy;
+        
+        while (l1 != null && l2 != null) {
+            if (l1.val < l2.val) {
+                tail.next = l1;
+                l1 = l1.next;
+            } else {
+                tail.next = l2;
+                l2 = l2.next;
             }
-            else{
-                current.next=right;
-                right=right.next;
-            }
-            current=current.next;
+            tail = tail.next;
         }
-
-        if(left!=null)current.next=left;
-
-        if(right!=null)current.next=right;
-
+        
+        tail.next = (l1 != null) ? l1 : l2;
         return dummy.next;
-
     }
 }
