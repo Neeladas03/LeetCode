@@ -1,21 +1,20 @@
 class Solution {
     public String addStrings(String num1, String num2) {
-       int n1=num1.length();
-       int n2=num2.length();
+        StringBuilder result = new StringBuilder();
+        int i = num1.length() - 1, j = num2.length() - 1, carry = 0;
 
-       long val1=0;
-       long val2=0;
+        while (i >= 0 || j >= 0 || carry != 0) {
+            int x = i >= 0 ? num1.charAt(i) - '0' : 0;
+            int y = j >= 0 ? num2.charAt(j) - '0' : 0;
 
-       for(int i=0;i<n1;i++){
-         val1=val1*10+(num1.charAt(i)-48);
-       }
+            int sum = x + y + carry;
+            result.append(sum % 10);
+            carry = sum / 10;
 
-       for(int i=0;i<n2;i++){
-          val2=val2*10+(num2.charAt(i)-48);
-       }
+            i--;
+            j--;
+        }
 
-       long ans=val1+val2;
-       String res=Long.toString(ans);
-       return res;
+        return result.reverse().toString();
     }
 }
