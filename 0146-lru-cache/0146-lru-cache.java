@@ -1,65 +1,69 @@
-class Node{
-    int key,val;
-    Node prev,next;
-    Node(int key,int val){
-        this.key=key;
-        this.val=val;
-        this.prev=null;
-        this.next=null;
+class Node {
+    int key;
+    int value;
+    Node next, prev;
+
+    public Node(int key, int value) {
+        this.key = key;
+        this.value = value;
+        this.next = null;
+        this.prev = null;
     }
 }
+
 class LRUCache {
-    private int cap;
-    private Map<Integer,Node>cache;
-    private Node head;
-    private Node tail;
+    int cap;
+    Map<Integer, Node> cache;
+    Node head, tail;
+
     public LRUCache(int capacity) {
-        cap=capacity;
-        cache=new HashMap<>();
-        head=new Node(0,0);
-        tail=new Node(0,0);
-        head.next=tail;
-        tail.prev=head;
+        cap = capacity;
+        cache = new HashMap<>();
+        head = new Node(0, 0);
+        tail = new Node(0, 0);
+        head.next = tail;
+        tail.prev = head;
     }
-    
+
     public int get(int key) {
-        if(cache.containsKey(key)){
-            Node node=cache.get(key);
+        if (cache.containsKey(key)) {
+            Node node = cache.get(key);
             remove(node);
             insert(node);
-            return node.val;
+            return node.value;
         }
         return -1;
     }
-    
+
     public void put(int key, int value) {
-        if(cache.containsKey(key)){
+        if (cache.containsKey(key)) {
             remove(cache.get(key));
         }
-        Node newnode=new Node(key,value);
-        cache.put(key,newnode);
+        Node newnode = new Node(key, value);
         insert(newnode);
-        if(cache.size()>cap){
-            Node lru=head.next;
+        cache.put(key, newnode);
+        if (cache.size() > cap) {
+            Node lru = head.next;
             remove(lru);
             cache.remove(lru.key);
         }
+
     }
 
-    public void insert(Node node){
-        Node prev=tail.prev;
-        Node next=tail;
-        prev.next=node;
-        next.prev=node;
-        node.prev=prev;
-        node.next=next;
+    public void insert(Node node) {
+        Node next = tail;
+        Node prev = tail.prev;
+        prev.next = node;
+        next.prev = node;
+        node.prev = prev;
+        node.next = next;
     }
 
-    public void remove(Node node){
-        Node prev=node.prev;
-        Node next=node.next;
-        prev.next=next;
-        next.prev=prev;
+    public void remove(Node node) {
+        Node prev = node.prev;
+        Node next = node.next;
+        prev.next = next;
+        next.prev = prev;
     }
 }
 
