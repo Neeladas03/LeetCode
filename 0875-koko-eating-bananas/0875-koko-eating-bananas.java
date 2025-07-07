@@ -4,10 +4,10 @@ class Solution {
         for(int num:piles){
             high=Math.max(high,num);
         }
-        int ans=high;
+        int ans=0;
         while(slow<=high){
             int mid=slow+(high-slow)/2;
-            if(canEat(piles,h,mid)){
+            if(canEat(piles,mid,h)){
                 ans=mid;
                 high=mid-1;
             }
@@ -16,13 +16,12 @@ class Solution {
             }
         }
         return ans;
-
     }
 
-    public boolean canEat(int piles[],int h,int s){
+    public static boolean canEat(int piles[],int speed,int h){
         long hours=0;
         for(int pile:piles){
-            hours+=(pile+(long)s-1)/s;
+            hours+=(pile+(long)speed-1)/speed;
         }
         return hours<=h;
     }
