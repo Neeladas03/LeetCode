@@ -6,12 +6,14 @@ class Solution {
             while(!st.isEmpty()&&st.peek()<i){
                 map.put(st.pop(),i);
             }
-                st.push(i);
+            st.push(i);
         }
 
+        int result[]= new int[nums1.length];
         for(int i=0;i<nums1.length;i++){
-            nums1[i]=map.getOrDefault(nums1[i],-1);
+            result[i]=map.getOrDefault(nums1[i],-1);
         }
-        return nums1;
+
+        return result;
     }
 }
