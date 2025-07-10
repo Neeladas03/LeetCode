@@ -1,21 +1,14 @@
 class Solution {
     public int findTargetSumWays(int[] nums, int target) {
-        int totalsum=0;
-        for(int num:nums)totalsum+=num;
+        return backtrack(0,0,nums,target);
+    }
 
-        if((totalsum+target)%2!=0 || totalsum<Math.abs(target))return 0;
-
-        int subsetsum=(totalsum+target)/2;
-
-        int dp[]=new int[subsetsum+1];
-        dp[0]=1;
-
-        for(int num:nums){
-            for(int i=subsetsum;i>=num;i--){
-                dp[i]+=dp[i-num];
-            }
+    public static int backtrack(int index,int total,int nums[],int target){
+        if(index==nums.length){
+            return total==target?1:0;
         }
 
-        return dp[subsetsum];
+        return backtrack(index+1,total+nums[index],nums,target)+
+        backtrack(index+1,total-nums[index],nums,target);
     }
 }
