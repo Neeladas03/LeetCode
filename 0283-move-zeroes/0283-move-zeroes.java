@@ -8,7 +8,10 @@ class Solution {
                 left++;
                 right++;
             }
-            else right++;
+            else{
+                left++;
+                right++;
+            }
         }
     }
 
