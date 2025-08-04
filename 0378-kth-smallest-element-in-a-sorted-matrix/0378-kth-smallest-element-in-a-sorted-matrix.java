@@ -4,10 +4,10 @@ class Solution {
         if(n==1)return matrix[0][0];
         int low=matrix[0][0],high=matrix[n-1][n-1];
 
-        for(int i=0;i<n;i++){
-            low=Math.min(low,matrix[i][0]);
-            high=Math.max(high,matrix[i][n-1]);
-        }
+        // for(int i=0;i<n;i++){
+        //     low=Math.min(low,matrix[i][0]);
+        //     high=Math.max(high,matrix[i][n-1]);
+        // }
 
 
         while(low<high){
