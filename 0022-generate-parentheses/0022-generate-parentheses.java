@@ -5,17 +5,18 @@ class Solution {
         return res;
     }
 
-    public void helper(int openp,int closep,String s,int n,List<String>res){
-        if(openp==closep && openp+closep==n*2){
+    public static void helper(int open,int close,String s,int n,List<String>res){
+        if(open+close==n*2){
             res.add(s);
             return;
         }
 
-        if(openp<n){
-            helper(openp+1,closep,s+"(",n,res);
+        if(open<n){
+            helper(open+1,close,s+"(",n,res);
         }
-        if(closep<openp){
-            helper(openp,closep+1,s+")",n,res);
+
+        if(close<open){
+            helper(open,close+1,s+")",n,res);
         }
     }
 }
