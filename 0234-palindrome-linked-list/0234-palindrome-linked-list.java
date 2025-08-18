@@ -15,22 +15,23 @@ class Solution {
             slow=slow.next;
             fast=fast.next.next;
         }
-        ListNode second_half=reverse(slow);
+
+        ListNode second=reverse(slow);
         ListNode first=head;
 
-        ListNode temp1=first;
-        ListNode temp2=second_half;
+        ListNode temp1=head;
+        ListNode temp2=second;
+
         while(temp2!=null){
-            if(temp1.val!=temp2.val){
-                return false;
-            }
+            if(temp1.val!=temp2.val)return false;
             temp1=temp1.next;
             temp2=temp2.next;
         }
+
         return true;
     }
 
-    static ListNode reverse(ListNode head){
+    public static ListNode reverse(ListNode head){
         ListNode prev1=null,prev2=null;
         while(head!=null){
             prev1=head.next;
