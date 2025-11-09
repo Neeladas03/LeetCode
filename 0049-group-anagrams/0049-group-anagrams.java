@@ -4,14 +4,13 @@ class Solution {
         for(String s:strs){
             int count[]=new int[26];
             for(char c:s.toCharArray()){
-               count[c-'a']++;
+                count[c-'a']++;
             }
 
             String word=Arrays.toString(count);
             map.putIfAbsent(word,new ArrayList<>());
             map.get(word).add(s);
         }
-
         return new ArrayList<>(map.values());
     }
 }
